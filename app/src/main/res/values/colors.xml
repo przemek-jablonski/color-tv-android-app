@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="thumbnail_placeholder_white">#e8e8e8</color>
+    <color name="card_text">#4a4a4a</color>
+    <color name="recycler_view_background">#dde3e9</color>
+    <color name="card_button_background">#e40913</color>
+    <color name="recycler_view_item_background">#AAAAAA</color>
+
 </resources>
