@@ -30,6 +30,7 @@ public class ColorTVApplication extends Application {
 
         Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
                 .name("movies.realm")
+                .deleteRealmIfMigrationNeeded()
                 .build()
         );
     }
