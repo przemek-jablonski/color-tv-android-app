@@ -5,4 +5,6 @@ package com.android.szparag.colortv.views.contracts;
  */
 
 public interface MovieListBaseView extends BaseAndroidView {
+
+    int getMovieGroupIndex();
 }

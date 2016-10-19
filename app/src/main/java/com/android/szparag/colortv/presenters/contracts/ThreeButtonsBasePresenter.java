@@ -11,4 +11,6 @@ public interface ThreeButtonsBasePresenter<T extends ThreeButtonsBaseView> exten
 
     void setView(ThreeButtonsBaseView view);
 
+    void killRealm();
+
 }

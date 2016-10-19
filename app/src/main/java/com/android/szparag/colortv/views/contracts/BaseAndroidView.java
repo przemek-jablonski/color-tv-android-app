@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.support.v4.app.Fragment;
 
+import com.android.szparag.colortv.ColorTVApplication;
+
 import java.io.InputStream;
 
 /**
@@ -16,7 +18,7 @@ public interface BaseAndroidView {
 
     InputStream getRawResource(int rawResId);
 
-    Application getApplication();
+    ColorTVApplication getAndroidApplication();
 
     Fragment getAndroidView();
 

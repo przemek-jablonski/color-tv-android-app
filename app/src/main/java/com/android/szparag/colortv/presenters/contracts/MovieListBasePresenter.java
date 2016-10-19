@@ -11,6 +11,4 @@ public interface MovieListBasePresenter<T extends BaseAndroidView> extends BaseP
 
     void setView(T view);
 
-
-
 }

@@ -1,7 +1,10 @@
 package com.android.szparag.colortv.views.contracts;
 
 
+import android.view.View;
+
 import com.android.szparag.colortv.ColorTVApplication;
+import com.android.szparag.colortv.backend.models.Movie;
 
 /**
  * Created by ciemek on 17/10/2016.
@@ -9,7 +12,10 @@ import com.android.szparag.colortv.ColorTVApplication;
 
 public interface ThreeButtonsBaseView extends BaseAndroidView {
 
-    @Override
-    ColorTVApplication getApplication();
+    void onClickButtonDataset(int movieGroupId);
+
+    void hideMovieTextView();
+    void showMovieTextView();
+    void updateMovieTextView(Movie movie);
 
 }

@@ -100,6 +100,7 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
         return null;
     }
 
+
     private Writer getMoviesJsonFile() throws IOException {
         InputStream inputStream = view.getRawResource(R.raw.data);
 
@@ -118,10 +119,10 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
         return writer;
     }
 
+
     private MovieGroup[] deserializeVideosJson(String fullJsonString) {
 
         String[] separatedMovieGroupsJsonString = fullJsonString.split("[\\r\\n]+");
-
         MovieGroup[] movies = new MovieGroup[separatedMovieGroupsJsonString.length];
 
         for (int i = 0; i < separatedMovieGroupsJsonString.length; ++i) {
@@ -129,5 +130,13 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
         }
 
         return movies;
+    }
+
+    //todo: brief documentation
+
+    @Override
+    public void killRealm() {
+        //fixme: what if screen rotates? presenter is injected as singleton, how realm will be recreated on screen recreation?
+        realm.close();
     }
 }

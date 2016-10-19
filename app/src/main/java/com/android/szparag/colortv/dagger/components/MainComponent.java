@@ -4,7 +4,6 @@ import com.android.szparag.colortv.ColorTVApplication;
 import com.android.szparag.colortv.dagger.modules.ColorTVModule;
 import com.android.szparag.colortv.presenters.MovieListPresenter;
 import com.android.szparag.colortv.presenters.ThreeButtonsPresenter;
-import com.android.szparag.colortv.views.MovieListFragment;
 import com.android.szparag.colortv.views.ThreeButtonsFragment;
 
 import javax.inject.Singleton;
@@ -24,7 +23,7 @@ public interface MainComponent {
     void inject(ThreeButtonsPresenter injectionTarget);
 
     //views:
-    void inject(MovieListFragment injectionTarget);
+//    void inject(MovieListFragment injectionTarget);
     void inject(ThreeButtonsFragment injectionTarget);
 
     void inject(ColorTVApplication injectionTarget);
