@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.android.szparag.colortv.R;
+import com.android.szparag.colortv.utils.Constants;
 
 public class MovieListActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class MovieListActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().add(
                 R.id.activity_movie_list_fragment_placeholder,
-                new MovieListActivityFragment()
+                MovieListActivityFragment.newInstance(getIntent().getIntExtra(Constants.MOVIE_LIST_INTENT_EXTRA_KEY, -1))
         ).commit();
 
     }

@@ -13,14 +13,8 @@
 
     <TextView
         android:text="yo"
+        android:id="@+id/textview_fragment_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <TextView
-        android:text="yo"
-        android:layout_marginTop="150dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
 
 </LinearLayout>

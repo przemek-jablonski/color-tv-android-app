@@ -7,7 +7,6 @@ package com.android.szparag.colortv.utils;
 public class Constants {
 
     public static final String MOVIE_LIST_INTENT_EXTRA_KEY = "movie_list_intent_dataset_id";
-    public static final String MOVIE_GROUP_INDEX_KEY = "movie_group_index_key";
 
     public static final int MOVIE_GROUP_INDEX_1 = 1;
     public static final int MOVIE_GROUP_INDEX_2 = 2;
