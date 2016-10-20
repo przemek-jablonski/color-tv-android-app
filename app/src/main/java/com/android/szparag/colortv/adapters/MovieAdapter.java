@@ -1,7 +1,9 @@
 package com.android.szparag.colortv.adapters;
 
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,10 +48,11 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         ((MovieViewHolder) holder).textTitle.setText(item.getTitle());
         ((MovieViewHolder) holder).textDescription.setText(item.getDescription());
         ((MovieViewHolder) holder).textButton.setText("klikaj tutej se");
+
         Picasso
                 .with(((MovieViewHolder) holder).textDuration.getContext())
-                .load(item.getThumbnailUrl())
-                .placeholder(R.color.thumbnail_placeholder_white)
+                .load(item.getThumbnailUrl().substring(0, item.getThumbnailUrl().lastIndexOf('?')))
+//                .placeholder(R.color.thumbnail_placeholder_white)
                 .into(((MovieViewHolder) holder).imageMovie);
 
         ((MovieViewHolder) holder).getBackgroundImage().reuse();
@@ -98,15 +101,6 @@ public class MovieAdapter extends BaseAdapter<Movie> {
                     }
                 });
             }
-
-//            if (recyclerOnPosClickListener != null) {
-//                itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        recyclerOnPosClickListener.OnPosClick(view, getLayoutPosition());
-//                    }
-//                });
-//            }
 
         }
 

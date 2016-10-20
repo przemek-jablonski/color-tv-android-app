@@ -6,6 +6,7 @@ import com.android.szparag.colortv.dagger.components.DaggerMainComponent;
 import com.android.szparag.colortv.dagger.components.MainComponent;
 import com.android.szparag.colortv.dagger.modules.ColorTVModule;
 import com.facebook.stetho.Stetho;
+import com.squareup.picasso.Picasso;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -38,6 +39,9 @@ public class ColorTVApplication extends Application {
         );
 
         Stetho.initializeWithDefaults(this);
+
+        Picasso.with(this).setLoggingEnabled(true);
+        Picasso.with(this).setLoggingEnabled(true);
     }
 
     public MainComponent getDaggerMainComponent() {
