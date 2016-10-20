@@ -1,5 +1,6 @@
 package com.android.szparag.colortv.presenters.contracts;
 
+import com.android.szparag.colortv.backend.models.Movie;
 import com.android.szparag.colortv.backend.models.MovieGroup;
 import com.android.szparag.colortv.backend.models.realm.RealmMovieGroup;
 import com.android.szparag.colortv.views.contracts.BaseAndroidView;
@@ -15,6 +16,9 @@ public interface MovieListBasePresenter<T extends BaseAndroidView> extends BaseP
 
     void populateViewWithMovies(int movieGroupId);
 
-    RealmMovieGroup getMovieGroup(int movieGroupId);
+    Movie queryMovieFromGroup(int movieGroupId, int moviePosition);
+    Movie queryMovieFromGroup(int moviePosition);
+
+    RealmMovieGroup queryMovieGroup(int movieGroupId);
 
 }

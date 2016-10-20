@@ -88,7 +88,7 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
             @Override
             public void OnPosClick(View v, int position) {
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra(MOVIE_LIST_INTENT_EXTRA_KEY, position);
+                resultIntent.putExtra(MOVIE_LIST_INTENT_EXTRA_KEY, presenter.queryMovieFromGroup(position).getVideoId());
                 getActivity().setResult(MOVIE_ID_RESPONSE_OK, resultIntent);
                 getActivity().finish();
             }

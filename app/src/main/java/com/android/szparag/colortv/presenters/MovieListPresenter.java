@@ -6,12 +6,9 @@ import com.android.szparag.colortv.presenters.contracts.MovieListBasePresenter;
 import com.android.szparag.colortv.utils.Utils;
 import com.android.szparag.colortv.views.contracts.MovieListBaseView;
 
-import java.util.LinkedList;
-
 import javax.inject.Inject;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 
 /**
  * Created by ciemek on 17/10/2016.
@@ -22,7 +19,9 @@ public class MovieListPresenter implements MovieListBasePresenter<MovieListBaseV
     @Inject
     Realm realm;
 
-    MovieListBaseView view;
+    private MovieListBaseView view;
+
+    private RealmMovieGroup movieGroup;
 
     //TODO: CARDS INSTEAD OF RECYCLER (main android website)
     //TODO: PARALLAX IMAGES
@@ -37,16 +36,27 @@ public class MovieListPresenter implements MovieListBasePresenter<MovieListBaseV
     @Override
     public void populateViewWithMovies(int movieGroupId) {
         view.buildRecycler();
-        RealmMovieGroup group = getMovieGroup(movieGroupId -1);
-        RealmList<Movie> movies = group.getMovies();
 
-        view.updateRecycler(movies);
+//        RealmMovieGroup group = queryMovieGroup(movieGroupId -1);
+//        RealmList<Movie> movies = group.getMovies();
+
+        movieGroup = queryMovieGroup(movieGroupId);
+
+        view.updateRecycler(queryMovieGroup(movieGroupId).getMovies());
     }
 
     @Override
-    public RealmMovieGroup getMovieGroup(int movieGroupId) {
-//        int count = (int) realm.where(RealmMovieGroup.class).count();
-//        int validCount = ((int) realm.where(RealmMovieGroup.class).equalTo("groupId", movieGroupId).count());
-        return realm.where(RealmMovieGroup.class).equalTo("groupId", movieGroupId).findFirst();
+    public Movie queryMovieFromGroup(int movieGroupId, int moviePosition) {
+        return queryMovieGroup(movieGroupId).getMovies().get(moviePosition);
+    }
+
+    @Override
+    public Movie queryMovieFromGroup(int moviePosition) {
+        return movieGroup.getMovies().get(moviePosition);
+    }
+
+    @Override
+    public RealmMovieGroup queryMovieGroup(int movieGroupId) {
+        return realm.where(RealmMovieGroup.class).equalTo("groupId", movieGroupId-1).findFirst();
     }
 }

@@ -90,7 +90,7 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == MOVIE_ID_REQUEST && resultCode == MOVIE_ID_RESPONSE_OK) {
             showMovieTextView();
-            updateMovieTextView(data.getIntExtra(MOVIE_LIST_INTENT_EXTRA_KEY, -1));
+            updateMovieTextView(data.getStringExtra(MOVIE_LIST_INTENT_EXTRA_KEY));
         }
     }
 
@@ -146,8 +146,8 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
     }
 
     @Override
-    public void updateMovieTextView(int movieId) {
-        textViewMovieId.setText(Integer.toString(movieId));
+    public void updateMovieTextView(String text) {
+        textViewMovieId.setText(text);
     }
 
 

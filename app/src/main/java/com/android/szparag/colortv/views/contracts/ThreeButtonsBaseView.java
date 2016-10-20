@@ -12,6 +12,6 @@ public interface ThreeButtonsBaseView extends BaseAndroidView {
 
     void hideMovieTextView();
     void showMovieTextView();
-    void updateMovieTextView(int movieId);
+    void updateMovieTextView(String text);
 
 }
