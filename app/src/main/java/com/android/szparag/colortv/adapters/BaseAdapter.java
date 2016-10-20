@@ -2,6 +2,9 @@ package com.android.szparag.colortv.adapters;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
+
+import com.yayandroid.parallaxrecyclerview.ParallaxImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;

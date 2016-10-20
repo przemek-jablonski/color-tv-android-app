@@ -8,9 +8,9 @@
     android:layout_margin="@dimen/activity_horizontal_margin"
     >
 
-    <ImageView
+    <com.yayandroid.parallaxrecyclerview.ParallaxImageView
         android:id="@+id/recycler_item_movie_image"
-        android:src="@color/colorPrimary"
+        android:src="@drawable/icon_ratings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"/>

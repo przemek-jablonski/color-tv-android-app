@@ -18,6 +18,7 @@ import com.android.szparag.colortv.backend.models.Movie;
 import com.android.szparag.colortv.presenters.contracts.MovieListBasePresenter;
 import com.android.szparag.colortv.utils.Utils;
 import com.android.szparag.colortv.views.contracts.MovieListBaseView;
+import com.yayandroid.parallaxrecyclerview.ParallaxRecyclerView;
 
 import java.io.InputStream;
 import java.util.List;
@@ -38,7 +39,7 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
     MovieListBasePresenter presenter;
 
     @BindView(R.id.recycler_movie_list)
-    RecyclerView recyclerMovieList;
+    ParallaxRecyclerView recyclerMovieList;
 
 
     private MovieAdapter adapter;

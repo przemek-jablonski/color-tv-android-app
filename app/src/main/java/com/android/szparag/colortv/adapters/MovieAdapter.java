@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.android.szparag.colortv.R;
 import com.android.szparag.colortv.backend.models.Movie;
 import com.squareup.picasso.Picasso;
+import com.yayandroid.parallaxrecyclerview.ParallaxImageView;
+import com.yayandroid.parallaxrecyclerview.ParallaxViewHolder;
 
 
 /**
@@ -30,11 +32,7 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         return new MovieViewHolder(
                 LayoutInflater
                         .from(parent.getContext())
-                        .inflate(
-                                R.layout.recycler_item_movie,
-                                parent,
-                                false
-                        )
+                        .inflate(R.layout.recycler_item_movie, parent, false)
         );
     }
 
@@ -53,6 +51,8 @@ public class MovieAdapter extends BaseAdapter<Movie> {
                 .load(item.getThumbnailUrl())
                 .placeholder(R.color.thumbnail_placeholder_white)
                 .into(((MovieViewHolder) holder).imageMovie);
+
+        ((MovieViewHolder) holder).getBackgroundImage().reuse();
     }
 
     @Override
@@ -60,9 +60,9 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         return super.getItemCount();
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder {
+    public class MovieViewHolder extends ParallaxViewHolder {
 
-        ImageView   imageMovie;
+        ParallaxImageView imageMovie;
 
         TextView    textDuration;
         TextView    textRating;
@@ -77,7 +77,7 @@ public class MovieAdapter extends BaseAdapter<Movie> {
             super(itemView);
 
             //todo: use butterknife here
-            imageMovie = ((ImageView) itemView.findViewById(R.id.recycler_item_movie_image));
+            imageMovie = ((ParallaxImageView) itemView.findViewById(R.id.recycler_item_movie_image));
 
             textDuration = (TextView) itemView.findViewById(R.id.recycler_item_movie_duration);
             textRating = (TextView) itemView.findViewById(R.id.recycler_item_movie_rating);
@@ -88,6 +88,8 @@ public class MovieAdapter extends BaseAdapter<Movie> {
 
             textButton = (Button) itemView.findViewById(R.id.recycler_item_movie_button);
 
+
+            //fixme:java.lang.NullPointerException: Attempt to invoke virtual method 'void com.yayandroid.parallaxrecyclerview.ParallaxImageView.setListener(com.yayandroid.parallaxrecyclerview.ParallaxImageView$ParallaxImageListener)' on a null object reference
             if (recyclerOnPosClickListener != null) {
                 textButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -97,6 +99,20 @@ public class MovieAdapter extends BaseAdapter<Movie> {
                 });
             }
 
+//            if (recyclerOnPosClickListener != null) {
+//                itemView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        recyclerOnPosClickListener.OnPosClick(view, getLayoutPosition());
+//                    }
+//                });
+//            }
+
+        }
+
+        @Override
+        public int getParallaxImageId() {
+            return R.id.recycler_item_movie_image;
         }
 
     }

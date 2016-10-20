@@ -36,12 +36,7 @@ public class MovieListPresenter implements MovieListBasePresenter<MovieListBaseV
     @Override
     public void populateViewWithMovies(int movieGroupId) {
         view.buildRecycler();
-
-//        RealmMovieGroup group = queryMovieGroup(movieGroupId -1);
-//        RealmList<Movie> movies = group.getMovies();
-
         movieGroup = queryMovieGroup(movieGroupId);
-
         view.updateRecycler(queryMovieGroup(movieGroupId).getMovies());
     }
 
