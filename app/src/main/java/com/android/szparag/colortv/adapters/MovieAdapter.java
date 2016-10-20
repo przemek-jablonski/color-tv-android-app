@@ -6,16 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.szparag.colortv.R;
 import com.android.szparag.colortv.backend.models.Movie;
+import com.squareup.picasso.Picasso;
+
 
 /**
  * Created by ciemek on 20/10/2016.
  */
 
 public class MovieAdapter extends BaseAdapter<Movie> {
+
 
     public MovieAdapter(@Nullable RecyclerOnPosClickListener clickListener) {
         super(clickListener);
@@ -37,12 +41,18 @@ public class MovieAdapter extends BaseAdapter<Movie> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Movie item = items.get(position);
+
         ((MovieViewHolder) holder).textDuration.setText(Integer.toString(item.getDurationInMinutes()));
         ((MovieViewHolder) holder).textRating.setText(Float.toString(item.getRating()));
         ((MovieViewHolder) holder).textViews.setText(item.getViewsCount());
         ((MovieViewHolder) holder).textTitle.setText(item.getTitle());
         ((MovieViewHolder) holder).textDescription.setText(item.getDescription());
         ((MovieViewHolder) holder).textButton.setText("klikaj tutej se");
+        Picasso
+                .with(((MovieViewHolder) holder).textDuration.getContext())
+                .load(item.getThumbnailUrl())
+                .placeholder(R.color.thumbnail_placeholder_white)
+                .into(((MovieViewHolder) holder).imageMovie);
     }
 
     @Override
@@ -52,22 +62,30 @@ public class MovieAdapter extends BaseAdapter<Movie> {
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
+        ImageView   imageMovie;
+
         TextView    textDuration;
         TextView    textRating;
         TextView    textViews;
+
         TextView    textTitle;
         TextView    textDescription;
+
         Button      textButton;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
 
             //todo: use butterknife here
+            imageMovie = ((ImageView) itemView.findViewById(R.id.recycler_item_movie_image));
+
             textDuration = (TextView) itemView.findViewById(R.id.recycler_item_movie_duration);
             textRating = (TextView) itemView.findViewById(R.id.recycler_item_movie_rating);
             textViews = (TextView) itemView.findViewById(R.id.recycler_item_movie_views);
+
             textTitle = (TextView) itemView.findViewById(R.id.recycler_item_movie_title);
             textDescription = (TextView) itemView.findViewById(R.id.recycler_item_movie_description);
+
             textButton = (Button) itemView.findViewById(R.id.recycler_item_movie_button);
 
             if (recyclerOnPosClickListener != null) {

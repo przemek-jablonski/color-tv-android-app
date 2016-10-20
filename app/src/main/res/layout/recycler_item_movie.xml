@@ -3,11 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:elevation="24dp"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    >
 
     <ImageView
+        android:id="@+id/recycler_item_movie_image"
+        android:src="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="2"/>
 
     <LinearLayout
@@ -23,35 +28,43 @@
 
             <TextView
                 android:id="@+id/recycler_item_movie_duration"
-                android:text="adada"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="adada"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin" />
 
             <TextView
                 android:id="@+id/recycler_item_movie_rating"
                 android:text="aadasda"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
 
             <TextView
                 android:id="@+id/recycler_item_movie_views"
                 android:text="adaddwadasda"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/recycler_item_movie_title"
             android:text="Title tutej dlugi abdabdasbdbasdbadag a  gag asg a"
+            android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"/>
 
         <TextView
             android:id="@+id/recycler_item_movie_description"
             android:text="Title tutej dlugi abdabdasbdbasdbadag a  gag asg a"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="3"/>
 
     </LinearLayout>
 
