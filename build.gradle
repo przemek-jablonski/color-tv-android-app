@@ -2,8 +2,12 @@
 
 buildscript {
     repositories {
+        maven {
+            url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
+        }
         jcenter()
-        mavenCentral()
+//        mavenCentral()
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.1'

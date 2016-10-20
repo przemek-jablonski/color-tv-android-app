@@ -5,6 +5,7 @@ import android.app.Application;
 import com.android.szparag.colortv.dagger.components.DaggerMainComponent;
 import com.android.szparag.colortv.dagger.components.MainComponent;
 import com.android.szparag.colortv.dagger.modules.ColorTVModule;
+import com.facebook.stetho.Stetho;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -21,18 +22,22 @@ public class ColorTVApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        //initializing dagger dependency injection
         daggerMainComponent = DaggerMainComponent
                 .builder()
                 .colorTVModule(new ColorTVModule(this))
                 .build();
 
-        Realm.init(this);
 
+        //initializing realm mobile database
+        Realm.init(this);
         Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
                 .name("movies.realm")
                 .deleteRealmIfMigrationNeeded()
                 .build()
         );
+
+        Stetho.initializeWithDefaults(this);
     }
 
     public MainComponent getDaggerMainComponent() {

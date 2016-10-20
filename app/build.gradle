@@ -48,4 +48,12 @@ dependencies {
 
     //gson
     compile 'com.google.code.gson:gson:2.4'
+
+    //stetho for realm
+//    compile 'com.uphyca.stetho_realm:2.0.0'
+
+    //stetho debugging
+    compile 'com.facebook.stetho:stetho:1.4.1'
+
+
 }
