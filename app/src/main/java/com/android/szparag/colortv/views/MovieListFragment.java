@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.android.szparag.colortv.ColorTVApplication;
 import com.android.szparag.colortv.R;
 import com.android.szparag.colortv.adapters.MovieAdapter;
+import com.android.szparag.colortv.adapters.RecyclerOnPosClickListener;
 import com.android.szparag.colortv.backend.models.Movie;
 import com.android.szparag.colortv.backend.models.MovieGroup;
 import com.android.szparag.colortv.backend.models.realm.RealmMovieGroup;
@@ -40,9 +41,6 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
 
     @BindView(R.id.recycler_movie_list)
     RecyclerView recyclerMovieList;
-
-    @BindView(R.id.textview_fragment_test)
-    TextView    textViewFragmentTest;
 
 
     private MovieAdapter adapter;
@@ -73,7 +71,7 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
         Utils.getDagger(this).inject(this);
         ButterKnife.bind(this, getView());
 
-        textViewFragmentTest.setText(Integer.toString(getMovieGroupIndex()));
+//        textViewFragmentTest.setText(Integer.toString(getMovieGroupIndex()));
 
         presenter.setView(this);
 
@@ -90,7 +88,12 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
         recyclerMovieList.setHasFixedSize(true); //todo: check if this should be 'true'
 //        recyclerMovieList.addItemDecoration();
 
-        adapter = new MovieAdapter(null);
+        adapter = new MovieAdapter(new RecyclerOnPosClickListener() {
+            @Override
+            public void OnPosClick(View v, int position) {
+                getActivity().finish();
+            }
+        });
         recyclerMovieList.setAdapter(adapter);
     }
 

@@ -11,12 +11,6 @@
     tools:context="com.android.szparag.colortv.views.MovieListFragment"
     android:orientation="vertical">
 
-    <TextView
-        android:text="yo"
-        android:id="@+id/textview_fragment_test"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_movie_list"
         android:layout_width="match_parent"

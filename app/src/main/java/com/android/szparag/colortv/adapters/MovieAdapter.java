@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.szparag.colortv.R;
@@ -51,25 +52,27 @@ public class MovieAdapter extends BaseAdapter<Movie> {
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
+
         TextView textDuration;
         TextView textRating;
         TextView textViews;
         TextView textTitle;
         TextView textDescription;
-        TextView textButton;
+        Button textButton;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
 
+            //todo: use butterknife here
             textDuration = (TextView) itemView.findViewById(R.id.recycler_item_movie_duration);
             textRating = (TextView) itemView.findViewById(R.id.recycler_item_movie_rating);
             textViews = (TextView) itemView.findViewById(R.id.recycler_item_movie_views);
             textTitle = (TextView) itemView.findViewById(R.id.recycler_item_movie_title);
             textDescription = (TextView) itemView.findViewById(R.id.recycler_item_movie_description);
-            textButton = (TextView) itemView.findViewById(R.id.recycler_item_movie_button);
+            textButton = (Button) itemView.findViewById(R.id.recycler_item_movie_button);
 
             if (recyclerOnPosClickListener != null) {
-                itemView.setOnClickListener(new View.OnClickListener() {
+                textButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         recyclerOnPosClickListener.OnPosClick(view, getLayoutPosition());
