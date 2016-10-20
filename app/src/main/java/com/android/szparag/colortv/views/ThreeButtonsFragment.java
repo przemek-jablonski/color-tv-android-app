@@ -15,7 +15,6 @@ import com.android.szparag.colortv.R;
 import com.android.szparag.colortv.activites.MovieListActivity;
 import com.android.szparag.colortv.backend.models.Movie;
 import com.android.szparag.colortv.presenters.contracts.ThreeButtonsBasePresenter;
-import com.android.szparag.colortv.utils.Constants;
 import com.android.szparag.colortv.utils.Utils;
 import com.android.szparag.colortv.views.contracts.ThreeButtonsBaseView;
 
@@ -27,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.android.szparag.colortv.utils.Constants.MOVIE_LIST_INTENT_EXTRA_KEY;
+import static com.android.szparag.colortv.utils.Constants.*;
 
 
 public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseView {
@@ -49,17 +48,17 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
 
     @OnClick(R.id.button_dataset_1)
     void onClickButtonDataset1() {
-        onClickButtonDataset(Constants.MOVIE_GROUP_INDEX_1);
+        onClickButtonDataset(MOVIE_GROUP_INDEX_1);
     }
 
     @OnClick(R.id.button_dataset_2)
     void onClickButtonDataset2() {
-        onClickButtonDataset(Constants.MOVIE_GROUP_INDEX_2);
+        onClickButtonDataset(MOVIE_GROUP_INDEX_2);
     }
 
     @OnClick(R.id.button_dataset_3)
     void onClickButtonDataset3() {
-        onClickButtonDataset(Constants.MOVIE_GROUP_INDEX_3);
+        onClickButtonDataset(MOVIE_GROUP_INDEX_3);
     }
 
 
@@ -84,11 +83,23 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
         ButterKnife.bind(this, getView());
 
         presenter.setView(this);
+        hideMovieTextView();
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MOVIE_ID_REQUEST && resultCode == MOVIE_ID_RESPONSE_OK) {
+            showMovieTextView();
+            updateMovieTextView(data.getIntExtra(MOVIE_LIST_INTENT_EXTRA_KEY, -1));
+        }
+    }
+
+
 
     @Override
     public void onResume() {
         super.onResume();
+
     }
 
     @Override
@@ -97,8 +108,15 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        hideMovieTextView();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
+
     }
 
     @Override
@@ -114,7 +132,7 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
     public void onClickButtonDataset(int movieGroupId) {
         Intent movieListIntent = new Intent(getActivity(), MovieListActivity.class);
         movieListIntent.putExtra(MOVIE_LIST_INTENT_EXTRA_KEY, movieGroupId);
-        startActivity(movieListIntent);
+        startActivityForResult(movieListIntent, MOVIE_ID_REQUEST);
     }
 
     @Override
@@ -128,8 +146,8 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
     }
 
     @Override
-    public void updateMovieTextView(Movie movie) {
-        textViewMovieId.setText(movie.getVideoId());
+    public void updateMovieTextView(int movieId) {
+        textViewMovieId.setText(Integer.toString(movieId));
     }
 
 

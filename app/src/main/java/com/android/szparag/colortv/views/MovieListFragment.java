@@ -1,25 +1,21 @@
 package com.android.szparag.colortv.views;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.test.mock.MockApplication;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.android.szparag.colortv.ColorTVApplication;
 import com.android.szparag.colortv.R;
 import com.android.szparag.colortv.adapters.MovieAdapter;
 import com.android.szparag.colortv.adapters.RecyclerOnPosClickListener;
 import com.android.szparag.colortv.backend.models.Movie;
-import com.android.szparag.colortv.backend.models.MovieGroup;
-import com.android.szparag.colortv.backend.models.realm.RealmMovieGroup;
 import com.android.szparag.colortv.presenters.contracts.MovieListBasePresenter;
-import com.android.szparag.colortv.utils.Constants;
 import com.android.szparag.colortv.utils.Utils;
 import com.android.szparag.colortv.views.contracts.MovieListBaseView;
 
@@ -30,6 +26,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.android.szparag.colortv.utils.Constants.*;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -51,7 +49,7 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
 
         Bundle fragmentBundle = new Bundle();
         int m = movieGroupId;
-        fragmentBundle.putInt(Constants.MOVIE_LIST_INTENT_EXTRA_KEY, movieGroupId);
+        fragmentBundle.putInt(MOVIE_LIST_INTENT_EXTRA_KEY, movieGroupId);
         fragment.setArguments(fragmentBundle);
 
         return fragment;
@@ -71,8 +69,6 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
         Utils.getDagger(this).inject(this);
         ButterKnife.bind(this, getView());
 
-//        textViewFragmentTest.setText(Integer.toString(getMovieGroupIndex()));
-
         presenter.setView(this);
 
         presenter.populateViewWithMovies(getMovieGroupIndex());
@@ -91,6 +87,9 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
         adapter = new MovieAdapter(new RecyclerOnPosClickListener() {
             @Override
             public void OnPosClick(View v, int position) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(MOVIE_LIST_INTENT_EXTRA_KEY, position);
+                getActivity().setResult(MOVIE_ID_RESPONSE_OK, resultIntent);
                 getActivity().finish();
             }
         });
@@ -104,7 +103,7 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
 
     @Override
     public int getMovieGroupIndex() {
-        return getArguments().getInt(Constants.MOVIE_LIST_INTENT_EXTRA_KEY);
+        return getArguments().getInt(MOVIE_LIST_INTENT_EXTRA_KEY);
     }
 
     @Override

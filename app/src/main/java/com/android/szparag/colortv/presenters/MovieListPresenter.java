@@ -45,8 +45,8 @@ public class MovieListPresenter implements MovieListBasePresenter<MovieListBaseV
 
     @Override
     public RealmMovieGroup getMovieGroup(int movieGroupId) {
-        int count = (int) realm.where(RealmMovieGroup.class).count();
-        int validCount = ((int) realm.where(RealmMovieGroup.class).equalTo("groupId", movieGroupId).count());
+//        int count = (int) realm.where(RealmMovieGroup.class).count();
+//        int validCount = ((int) realm.where(RealmMovieGroup.class).equalTo("groupId", movieGroupId).count());
         return realm.where(RealmMovieGroup.class).equalTo("groupId", movieGroupId).findFirst();
     }
 }

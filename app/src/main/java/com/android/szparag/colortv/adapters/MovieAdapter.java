@@ -52,13 +52,12 @@ public class MovieAdapter extends BaseAdapter<Movie> {
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
-
-        TextView textDuration;
-        TextView textRating;
-        TextView textViews;
-        TextView textTitle;
-        TextView textDescription;
-        Button textButton;
+        TextView    textDuration;
+        TextView    textRating;
+        TextView    textViews;
+        TextView    textTitle;
+        TextView    textDescription;
+        Button      textButton;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
