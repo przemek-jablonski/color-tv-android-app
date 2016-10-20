@@ -1,5 +1,10 @@
 package com.android.szparag.colortv.views.contracts;
 
+import com.android.szparag.colortv.backend.models.Movie;
+import com.android.szparag.colortv.backend.models.realm.RealmMovieGroup;
+
+import java.util.List;
+
 /**
  * Created by ciemek on 17/10/2016.
  */
@@ -7,4 +12,8 @@ package com.android.szparag.colortv.views.contracts;
 public interface MovieListBaseView extends BaseAndroidView {
 
     int getMovieGroupIndex();
+
+    void buildRecycler();
+
+    void updateRecycler(List<Movie> movies);
 }

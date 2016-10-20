@@ -1,5 +1,7 @@
 package com.android.szparag.colortv.presenters.contracts;
 
+import com.android.szparag.colortv.backend.models.MovieGroup;
+import com.android.szparag.colortv.backend.models.realm.RealmMovieGroup;
 import com.android.szparag.colortv.views.contracts.BaseAndroidView;
 import com.android.szparag.colortv.views.contracts.ThreeButtonsBaseView;
 
@@ -10,5 +12,9 @@ import com.android.szparag.colortv.views.contracts.ThreeButtonsBaseView;
 public interface MovieListBasePresenter<T extends BaseAndroidView> extends BasePresenter<T> {
 
     void setView(T view);
+
+    void populateViewWithMovies(int movieGroupId);
+
+    RealmMovieGroup getMovieGroup(int movieGroupId);
 
 }

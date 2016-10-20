@@ -1,0 +1,5 @@
+Little doodle - solidifying skills in quick Android apps prototyping.
+
+Small app with two screens, retrieving json data from local repository, populating Realm with it and handling UI calls.
+
+Dagger2 + Realm.io database + Butterknife + Picasso + Gson

@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.android.szparag.colortv.activites.MovieListActivityFragment"
+    tools:context="com.android.szparag.colortv.views.MovieListFragment"
     android:orientation="vertical">
 
     <TextView
@@ -16,5 +16,10 @@
         android:id="@+id/textview_fragment_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_movie_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
