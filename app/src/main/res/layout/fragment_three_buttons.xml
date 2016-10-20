@@ -17,19 +17,24 @@
         android:id="@+id/button_dataset_1"
         android:text="@string/button_dataset_1_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@color/colortv_primary_orange_lighter" />
     <Button
         android:id="@+id/button_dataset_2"
         android:text="@string/button_dataset_2_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@color/colortv_primary_orange_lighter" />
 
     <Button
         android:id="@+id/button_dataset_3"
         android:text="@string/button_dataset_3_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@color/colortv_primary_orange_lighter" />
 
     <TextView
         android:id="@+id/textview_movie_id"

@@ -78,12 +78,9 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
 
     @Override
     public void buildRecycler() {
-        recyclerMovieList.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false)
-        );
+        recyclerMovieList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerMovieList.setHasFixedSize(true); //todo: check if this should be 'true'
-//        recyclerMovieList.addItemDecoration();
 
         adapter = new MovieAdapter(new RecyclerOnPosClickListener() {
             @Override

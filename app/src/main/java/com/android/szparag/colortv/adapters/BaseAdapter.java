@@ -16,6 +16,8 @@ import java.util.List;
 
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    //todo: 1080.jpg -> 720.jpg in parallaxImageView
+
     protected RecyclerOnPosClickListener    recyclerOnPosClickListener;
     protected List<T>                       items;
 

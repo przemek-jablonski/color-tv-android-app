@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/colortv_primary_orange</color>
+    <color name="colorPrimaryDark">#303F9f</color>
+    <color name="colorAccent">#FF5722</color>
+
+    <color name="materialGrey50">#fafafa</color>
+    <color name="materialGrey400">#bdbdbd</color>
+    <color name="materialGrey500">#FF9E9E9E</color>
+    <color name="materialGrey700">#FF616161</color>
+    <color name="materialGrey800">#212121</color>
+    <color name="materialBrown100">#d7ccc8</color>
 
     <color name="thumbnail_placeholder_white">#e8e8e8</color>
     <color name="card_text">#4a4a4a</color>
     <color name="recycler_view_background">#dde3e9</color>
-    <color name="card_button_background">#e40913</color>
+
+    <color name="colortv_primary_orange">#FF5722</color>
+    <color name="colortv_primary_orange_medium">#ff7043</color>
+    <color name="colortv_primary_orange_lighter">#ffccbc</color>
+    <color name="colortv_primary_orange_light">#ffab91</color>
+    <color name="colortv_black">@color/materialGrey800</color>
+    <color name="colortv_white">@color/materialGrey50</color>
+
+    //no usages:
     <color name="recycler_view_item_background">#AAAAAA</color>
+
+
+    <color name="backround_dark_gradient_start">@color/materialGrey500</color>
+    <color name="backround_dark_gradient_end">@color/materialGrey700</color>
+
+    <color name="backround_light_gradient_start">@color/materialGrey50</color>
+    <color name="backround_light_gradient_center">@color/materialBrown100</color>
+    <color name="backround_light_gradient_end">@color/materialGrey400</color>
 
 </resources>

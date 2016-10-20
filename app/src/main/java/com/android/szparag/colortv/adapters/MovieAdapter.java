@@ -50,10 +50,9 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         ((MovieViewHolder) holder).textButton.setText("klikaj tutej se");
 
         Picasso
-                .with(((MovieViewHolder) holder).textDuration.getContext())
-                .load(item.getThumbnailUrl().substring(0, item.getThumbnailUrl().lastIndexOf('?')))
-//                .placeholder(R.color.thumbnail_placeholder_white)
-                .into(((MovieViewHolder) holder).imageMovie);
+                .with(((MovieViewHolder) holder).getBackgroundImage().getContext())
+                .load(item.getThumbnailUrl())
+                .into(((MovieViewHolder) holder).getBackgroundImage());
 
         ((MovieViewHolder) holder).getBackgroundImage().reuse();
     }
@@ -90,7 +89,6 @@ public class MovieAdapter extends BaseAdapter<Movie> {
             textDescription = (TextView) itemView.findViewById(R.id.recycler_item_movie_description);
 
             textButton = (Button) itemView.findViewById(R.id.recycler_item_movie_button);
-
 
             //fixme:java.lang.NullPointerException: Attempt to invoke virtual method 'void com.yayandroid.parallaxrecyclerview.ParallaxImageView.setListener(com.yayandroid.parallaxrecyclerview.ParallaxImageView$ParallaxImageListener)' on a null object reference
             if (recyclerOnPosClickListener != null) {
