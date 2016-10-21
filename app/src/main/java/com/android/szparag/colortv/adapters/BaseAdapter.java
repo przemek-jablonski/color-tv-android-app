@@ -2,9 +2,6 @@ package com.android.szparag.colortv.adapters;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
-
-import com.yayandroid.parallaxrecyclerview.ParallaxImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,16 +11,19 @@ import java.util.List;
  * Created by ciemek on 20/10/2016.
  */
 
+/**
+ *  Base abstract adapter for RecyclerViews. Sets the hierarchy, basic functionalities around
+ *  list of items and custom (nullable) click listener.
+ *
+ * @param <T> Generic type that adapter will handle in overriden child class
+ */
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    //todo: 1080.jpg -> 720.jpg in parallaxImageView
 
     protected RecyclerOnPosClickListener    recyclerOnPosClickListener;
     protected List<T>                       items;
 
 
     public BaseAdapter() {
-        super();
         items = new ArrayList<T>();
     }
 

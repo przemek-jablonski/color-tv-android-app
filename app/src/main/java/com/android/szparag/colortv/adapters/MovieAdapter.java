@@ -1,10 +1,8 @@
 package com.android.szparag.colortv.adapters;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +13,17 @@ import android.widget.TextView;
 import com.android.szparag.colortv.R;
 import com.android.szparag.colortv.backend.models.Movie;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
-import com.yayandroid.parallaxrecyclerview.ParallaxImageView;
-import com.yayandroid.parallaxrecyclerview.ParallaxViewHolder;
 
 
 /**
  * Created by ciemek on 20/10/2016.
  */
 
+/**
+ *  Implementation of BaseAdapter, with generic of Movie object.
+ *  Handles more high-level RecyclerView.Adapter's calls, rest of the methods are handled in
+ *  BaseAdapter<T> superclass.
+ */
 public class MovieAdapter extends BaseAdapter<Movie> {
 
 
@@ -40,6 +40,7 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         );
     }
 
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Movie item = items.get(position);
@@ -49,9 +50,8 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         ((MovieViewHolder) holder).textTitle.setText(item.getTitle());
         ((MovieViewHolder) holder).textDescription.setText(item.getDescription());
         ((MovieViewHolder) holder).textDuration.setText(Integer.toString(item.getDurationInMinutes())+"m");
-
-        Picasso
-                .with(((MovieViewHolder) holder).imageMovie.getContext())
+        ((MovieViewHolder) holder).textDuration.setText(Integer.toString(item.getDurationInMinutes())+"m");
+        Picasso.with(((MovieViewHolder) holder).imageMovie.getContext())
                 .load(item.getThumbnailUrl())
                 .into(((MovieViewHolder) holder).imageMovie);
     }
@@ -61,17 +61,15 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         return super.getItemCount();
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder {
+
+    public class MovieViewHolder extends ViewHolder {
 
         ImageView imageMovie;
-
         TextView    textDuration;
         TextView    textRating;
         TextView    textViews;
-
         TextView    textTitle;
         TextView    textDescription;
-
         Button      textButton;
 
         public MovieViewHolder(View itemView) {
@@ -98,10 +96,7 @@ public class MovieAdapter extends BaseAdapter<Movie> {
                     }
                 });
             }
-
         }
 
     }
-
-
 }

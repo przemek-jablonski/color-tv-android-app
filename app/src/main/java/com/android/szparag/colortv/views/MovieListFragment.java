@@ -1,9 +1,9 @@
 package com.android.szparag.colortv.views;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +18,6 @@ import com.android.szparag.colortv.backend.models.Movie;
 import com.android.szparag.colortv.presenters.contracts.MovieListBasePresenter;
 import com.android.szparag.colortv.utils.Utils;
 import com.android.szparag.colortv.views.contracts.MovieListBaseView;
-import com.yayandroid.parallaxrecyclerview.ParallaxRecyclerView;
 
 import java.io.InputStream;
 import java.util.List;
@@ -28,7 +27,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.android.szparag.colortv.utils.Constants.*;
+import static com.android.szparag.colortv.utils.Constants.MOVIE_ID_RESPONSE_OK;
+import static com.android.szparag.colortv.utils.Constants.MOVIE_LIST_INTENT_EXTRA_KEY;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -41,22 +41,20 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
     @BindView(R.id.recycler_movie_list)
     RecyclerView recyclerMovieList;
 
-
     private MovieAdapter adapter;
 
 
+    //static builder (for parameters):
     public static MovieListFragment newInstance(int movieGroupId) {
         MovieListFragment fragment = new MovieListFragment();
-
         Bundle fragmentBundle = new Bundle();
         int m = movieGroupId;
         fragmentBundle.putInt(MOVIE_LIST_INTENT_EXTRA_KEY, movieGroupId);
         fragment.setArguments(fragmentBundle);
-
         return fragment;
     }
 
-
+    //android lifecycle callbacks:
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,22 +64,17 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         Utils.getDagger(this).inject(this);
         ButterKnife.bind(this, getView());
-
         presenter.setView(this);
-
-        presenter.populateViewWithMovies(getMovieGroupIndex());
+        presenter.populateViewWithMovies(getMovieGroupIndex()); //todo: wrap it in async task or whatever
     }
 
-
+    //base view methods implementation:
     @Override
     public void buildRecycler() {
         recyclerMovieList.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        recyclerMovieList.setHasFixedSize(true); //todo: check if this should be 'true'
-
+        recyclerMovieList.setHasFixedSize(true);
         adapter = new MovieAdapter(new RecyclerOnPosClickListener() {
             @Override
             public void OnPosClick(View v, int position) {
@@ -109,6 +102,8 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
         return getActivity().getPackageName();
     }
 
+
+    //BaseAndroidView methods implementation:
     @Override
     public InputStream getRawResource(int rawResId) {
         return getResources().openRawResource(rawResId);

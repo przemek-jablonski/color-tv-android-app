@@ -1,7 +1,6 @@
 package com.android.szparag.colortv;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.android.szparag.colortv.dagger.components.DaggerMainComponent;
 import com.android.szparag.colortv.dagger.components.MainComponent;
@@ -39,8 +38,10 @@ public class ColorTVApplication extends Application {
                 .build()
         );
 
+        //initializing stetho debugging bridge
         Stetho.initializeWithDefaults(this);
 
+        //logging for picasso
         Picasso.with(this).setLoggingEnabled(true);
     }
 

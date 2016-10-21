@@ -10,5 +10,6 @@
 
     <string name="button_watch_movie">Watch this movie</string>
     <string name="textview_movie_selected">Selected movie with %1$s id</string>
+    <string name="movie_duration_string">%1$dm</string>
 
 </resources>

@@ -8,7 +8,6 @@ import com.android.szparag.colortv.presenters.MovieListPresenter;
 import com.android.szparag.colortv.presenters.ThreeButtonsPresenter;
 import com.android.szparag.colortv.presenters.contracts.MovieListBasePresenter;
 import com.android.szparag.colortv.presenters.contracts.ThreeButtonsBasePresenter;
-import com.android.szparag.colortv.views.contracts.ThreeButtonsBaseView;
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;
@@ -21,6 +20,9 @@ import io.realm.Realm;
  * Created by ciemek on 17/10/2016.
  */
 
+/**
+ * Dagger2 module, which provides and distributes dependencies across the project.
+ */
 @Module
 public class ColorTVModule {
 
@@ -41,8 +43,6 @@ public class ColorTVModule {
     ColorTVApplication provideColorTVApplication() throws ClassCastException {
         return ((ColorTVApplication) application);
     }
-
-    //todo: remove redundant imports
 
     @Provides
     @Singleton

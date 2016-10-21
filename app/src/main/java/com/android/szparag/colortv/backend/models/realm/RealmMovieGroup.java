@@ -2,8 +2,6 @@ package com.android.szparag.colortv.backend.models.realm;
 
 import com.android.szparag.colortv.backend.models.Movie;
 
-import java.util.List;
-
 import io.realm.RealmList;
 import io.realm.RealmModel;
 import io.realm.annotations.PrimaryKey;

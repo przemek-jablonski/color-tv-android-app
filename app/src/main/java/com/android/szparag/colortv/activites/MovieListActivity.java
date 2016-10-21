@@ -24,7 +24,6 @@ public class MovieListActivity extends AppCompatActivity {
                 R.id.activity_movie_list_fragment_placeholder,
                 MovieListFragment.newInstance(getIntent().getIntExtra(MOVIE_LIST_INTENT_EXTRA_KEY, -1))
         ).commit();
-
     }
 
 }

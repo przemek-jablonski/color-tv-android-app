@@ -9,6 +9,4 @@ import com.android.szparag.colortv.views.contracts.BaseAndroidView;
 public interface BasePresenter<T extends BaseAndroidView> {
 
     void setView(T view);
-
-
 }

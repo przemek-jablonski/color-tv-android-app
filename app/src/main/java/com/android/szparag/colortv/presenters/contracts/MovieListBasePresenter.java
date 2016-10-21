@@ -1,10 +1,8 @@
 package com.android.szparag.colortv.presenters.contracts;
 
 import com.android.szparag.colortv.backend.models.Movie;
-import com.android.szparag.colortv.backend.models.MovieGroup;
 import com.android.szparag.colortv.backend.models.realm.RealmMovieGroup;
 import com.android.szparag.colortv.views.contracts.BaseAndroidView;
-import com.android.szparag.colortv.views.contracts.ThreeButtonsBaseView;
 
 /**
  * Created by ciemek on 17/10/2016.

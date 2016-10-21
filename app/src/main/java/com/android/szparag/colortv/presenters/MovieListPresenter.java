@@ -16,15 +16,13 @@ import io.realm.Realm;
 
 public class MovieListPresenter implements MovieListBasePresenter<MovieListBaseView> {
 
+
     @Inject
     Realm realm;
 
     private MovieListBaseView view;
-
     private RealmMovieGroup movieGroup;
 
-    //TODO: CARDS INSTEAD OF RECYCLER (main android website)
-    //TODO: PARALLAX IMAGES
 
     @Override
     public void setView(MovieListBaseView view) {
@@ -32,6 +30,7 @@ public class MovieListPresenter implements MovieListBasePresenter<MovieListBaseV
 
         Utils.getDagger(view.getAndroidView()).inject(this);
     }
+
 
     @Override
     public void populateViewWithMovies(int movieGroupId) {

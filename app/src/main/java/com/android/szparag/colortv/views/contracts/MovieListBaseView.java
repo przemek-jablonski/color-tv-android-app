@@ -1,7 +1,6 @@
 package com.android.szparag.colortv.views.contracts;
 
 import com.android.szparag.colortv.backend.models.Movie;
-import com.android.szparag.colortv.backend.models.realm.RealmMovieGroup;
 
 import java.util.List;
 

@@ -1,9 +1,7 @@
 package com.android.szparag.colortv.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.test.mock.MockApplication;
 
 import com.android.szparag.colortv.ColorTVApplication;
 import com.android.szparag.colortv.dagger.components.MainComponent;

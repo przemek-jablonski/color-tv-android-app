@@ -1,6 +1,6 @@
 package com.android.szparag.colortv.presenters.contracts;
 
-import com.android.szparag.colortv.views.contracts.BaseAndroidView;
+import com.android.szparag.colortv.backend.models.MovieGroup;
 import com.android.szparag.colortv.views.contracts.ThreeButtonsBaseView;
 
 /**
@@ -11,6 +11,9 @@ public interface ThreeButtonsBasePresenter<T extends ThreeButtonsBaseView> exten
 
     void setView(ThreeButtonsBaseView view);
 
-    void killRealm();
+    boolean purgeRealm();
 
+    boolean populateRealm(MovieGroup[] movieGroupsFromJson);
+
+    void killRealm();
 }

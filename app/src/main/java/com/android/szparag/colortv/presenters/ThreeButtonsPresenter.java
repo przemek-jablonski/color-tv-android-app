@@ -22,7 +22,10 @@ import java.io.Writer;
 import javax.inject.Inject;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
+
+import static com.android.szparag.colortv.utils.Constants.COLORTV_LOG_TAG;
+import static com.android.szparag.colortv.utils.Constants.JSON_MOVIES_COUNT_PREDICTED;
+import static com.android.szparag.colortv.utils.Constants.JSON_MOVIES_GROUP_COUNT_PREDICTED;
 
 /**
  * Created by ciemek on 17/10/2016.
@@ -30,13 +33,14 @@ import io.realm.RealmResults;
 
 public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeButtonsBaseView> {
 
-    private ThreeButtonsBaseView view;
-
     @Inject
     Gson gson;
 
     @Inject
     Realm realm;
+
+    private ThreeButtonsBaseView view;
+
 
     @Override
     public void setView(ThreeButtonsBaseView view) {
@@ -44,50 +48,42 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
 
         Utils.getDagger(view.getAndroidView()).inject(this);
 
-        long videosCount = realm.where(Movie.class).count();
-
-        //todo: always will be videosCount == 8 (eg. every time updating realm), fix it
-        if (videosCount != 8) {
-            Log.e("TROL", "videos count different than 9 (is " + videosCount + ")");
+        if (realm.where(Movie.class).count() != JSON_MOVIES_COUNT_PREDICTED) {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
-
-                    Log.e("TROL", "transaction begins");
-
-                    //debug!
-                    if (realm.where(Movie.class).findAll().deleteAllFromRealm()
-                            && realm.where(RealmMovieGroup.class).findAll().deleteAllFromRealm()) {
-                        Log.e("TROL", "deleted all from realm");
-                    }
+                    purgeRealm();
 
                     MovieGroup[] realmMovieGroupsFromJson = readVideosFromJson();
 
-                    for (int groupCount = 0; groupCount < realmMovieGroupsFromJson.length; ++groupCount) {
-
-                        RealmMovieGroup realmRealmMovieGroup = realm.createObject(RealmMovieGroup.class, groupCount);
-
-                        for (int movieCount = 0; movieCount < realmMovieGroupsFromJson[groupCount].getMovies().length; ++movieCount) {
-                            Movie realmMovie = realm.copyToRealmOrUpdate(realmMovieGroupsFromJson[groupCount].getMovies()[movieCount]);
-                            realmRealmMovieGroup.addVideo(movieCount, realmMovie);
-                        }
+                    if (!populateRealm(realmMovieGroupsFromJson)) {
+                        Log.e(COLORTV_LOG_TAG, "Realm not populated correctly");
                     }
                 }
             });
-        } else {
-            Log.e("TROL", "videos count is " + videosCount);
+        }
+    }
+
+    @Override
+    public boolean purgeRealm() {
+        return (realm.where(Movie.class).findAll().deleteAllFromRealm()
+                && realm.where(RealmMovieGroup.class).findAll().deleteAllFromRealm()) ? true : false;
+    }
+
+    @Override
+    public boolean populateRealm(MovieGroup[] movieGroupsFromJson) {
+        for (int groupCount = 0; groupCount < movieGroupsFromJson.length; ++groupCount) {
+
+            RealmMovieGroup realmRealmMovieGroup = realm.createObject(RealmMovieGroup.class, groupCount);
+
+            for (int movieCount = 0; movieCount < movieGroupsFromJson[groupCount].getMovies().length; ++movieCount) {
+                Movie realmMovie = realm.copyToRealmOrUpdate(movieGroupsFromJson[groupCount].getMovies()[movieCount]);
+                realmRealmMovieGroup.addVideo(movieCount, realmMovie);
+            }
         }
 
-        RealmResults<RealmMovieGroup> mg = realm.where(RealmMovieGroup.class).findAll();
-        RealmResults<Movie> m = realm.where(Movie.class).findAll();
-
-        Log.e("TROL", "m(4).views:" + m.get(4).getViewsCount());
-
-        Log.e("TROL", "method ends, total items count in realm:"
-            + realm.where(Movie.class).count() + ".");
-
-
-
+        return (realm.where(Movie.class).count() == JSON_MOVIES_COUNT_PREDICTED
+                && realm.where(RealmMovieGroup.class).count() == JSON_MOVIES_GROUP_COUNT_PREDICTED) ? true : false;
     }
 
     //todo: make async task with this or whatever
@@ -132,11 +128,10 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
         return movies;
     }
 
-    //todo: brief documentation
 
     @Override
     public void killRealm() {
-        //fixme: what if screen rotates? presenter is injected as singleton, how realm will be recreated on screen recreation?
+        //todo: what if screen rotates? presenter is injected as singleton, how realm will be recreated on screen recreation?
         realm.close();
     }
 }

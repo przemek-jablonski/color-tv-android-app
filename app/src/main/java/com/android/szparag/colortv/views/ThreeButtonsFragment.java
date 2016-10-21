@@ -1,9 +1,9 @@
 package com.android.szparag.colortv.views;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.android.szparag.colortv.ColorTVApplication;
 import com.android.szparag.colortv.R;
 import com.android.szparag.colortv.activites.MovieListActivity;
-import com.android.szparag.colortv.backend.models.Movie;
 import com.android.szparag.colortv.presenters.contracts.ThreeButtonsBasePresenter;
 import com.android.szparag.colortv.utils.Utils;
 import com.android.szparag.colortv.views.contracts.ThreeButtonsBaseView;
@@ -26,7 +25,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.android.szparag.colortv.utils.Constants.*;
+import static com.android.szparag.colortv.utils.Constants.MOVIE_GROUP_INDEX_1;
+import static com.android.szparag.colortv.utils.Constants.MOVIE_GROUP_INDEX_2;
+import static com.android.szparag.colortv.utils.Constants.MOVIE_GROUP_INDEX_3;
+import static com.android.szparag.colortv.utils.Constants.MOVIE_ID_REQUEST;
+import static com.android.szparag.colortv.utils.Constants.MOVIE_ID_RESPONSE_OK;
+import static com.android.szparag.colortv.utils.Constants.MOVIE_LIST_INTENT_EXTRA_KEY;
 
 
 public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseView {
@@ -62,13 +66,7 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
     }
 
 
-
-    //todo: newInstance
-    public ThreeButtonsFragment() {
-
-    }
-
-
+    //android lifecycle callbacks:
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,10 +76,8 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         Utils.getDagger(this).inject(this);
         ButterKnife.bind(this, getView());
-
         presenter.setView(this);
         hideMovieTextView();
     }
@@ -94,40 +90,14 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
         }
     }
 
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
     @Override
     public void onStop() {
         super.onStop();
         hideMovieTextView();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
 
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-
-    //todo: instead of launching new activity, replace fragments? is it good practice? ask around (wykop?)
-
-
+    //base view methods implementations:
     @Override
     public void onClickButtonDataset(int movieGroupId) {
         Intent movieListIntent = new Intent(getActivity(), MovieListActivity.class);
@@ -150,7 +120,7 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
         textViewMovieId.setText(getString(R.string.textview_movie_selected, text));
     }
 
-
+    //BaseAndroidView methods implementations:
     @Override
     public InputStream getRawResource(int rawResId) {
         return getContext().getResources().openRawResource(rawResId);
