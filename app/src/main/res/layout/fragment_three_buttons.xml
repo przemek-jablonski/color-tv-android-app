@@ -38,6 +38,8 @@
 
     <TextView
         android:id="@+id/textview_movie_id"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

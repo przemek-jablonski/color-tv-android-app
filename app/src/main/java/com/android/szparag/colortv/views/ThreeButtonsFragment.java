@@ -147,7 +147,7 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
 
     @Override
     public void updateMovieTextView(String text) {
-        textViewMovieId.setText(text);
+        textViewMovieId.setText(getString(R.string.textview_movie_selected, text));
     }
 
 

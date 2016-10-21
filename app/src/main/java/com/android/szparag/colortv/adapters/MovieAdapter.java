@@ -1,5 +1,6 @@
 package com.android.szparag.colortv.adapters;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.android.szparag.colortv.R;
 import com.android.szparag.colortv.backend.models.Movie;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 import com.yayandroid.parallaxrecyclerview.ParallaxImageView;
 import com.yayandroid.parallaxrecyclerview.ParallaxViewHolder;
 
@@ -42,11 +44,11 @@ public class MovieAdapter extends BaseAdapter<Movie> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Movie item = items.get(position);
 
-        ((MovieViewHolder) holder).textDuration.setText(Integer.toString(item.getDurationInMinutes()));
         ((MovieViewHolder) holder).textRating.setText(Float.toString(item.getRating()));
         ((MovieViewHolder) holder).textViews.setText(item.getViewsCount());
         ((MovieViewHolder) holder).textTitle.setText(item.getTitle());
         ((MovieViewHolder) holder).textDescription.setText(item.getDescription());
+        ((MovieViewHolder) holder).textDuration.setText(Integer.toString(item.getDurationInMinutes())+"m");
         ((MovieViewHolder) holder).textButton.setText("klikaj tutej se");
 
         Picasso
