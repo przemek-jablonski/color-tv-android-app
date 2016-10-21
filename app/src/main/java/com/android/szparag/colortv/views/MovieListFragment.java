@@ -68,7 +68,7 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
         Utils.getDagger(this).inject(this);
         viewUnbinder = ButterKnife.bind(this, getView());
         presenter.setView(this);
-        presenter.populateViewWithMovies(getMovieGroupIndex()); //todo: wrap it in async task or whatever
+        presenter.populateViewWithMovies(getMovieGroupIndex());
     }
 
     @Override

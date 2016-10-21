@@ -8,8 +8,6 @@ import com.android.szparag.colortv.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    //todo: make tests suite (100% coverage!)
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

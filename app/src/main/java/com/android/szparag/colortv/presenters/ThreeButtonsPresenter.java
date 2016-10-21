@@ -36,7 +36,6 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
     @Inject
     Gson gson;
 
-    //todo: animations? + fixme
     @Inject
     Realm realm;
 
@@ -49,9 +48,8 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
 
         Utils.getDagger(view.getAndroidView()).inject(this);
 
-        //get data from file to db in multithreaded fashion:
         if (realm.where(Movie.class).count() != JSON_MOVIES_COUNT_PREDICTED) {
-            realm.executeTransactionAsync(new Realm.Transaction() {
+            realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     purgeRealm();
@@ -65,6 +63,8 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
             });
         }
     }
+
+
 
     @Override
     public boolean purgeRealm() {
@@ -88,7 +88,6 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
                 && realm.where(RealmMovieGroup.class).count() == JSON_MOVIES_GROUP_COUNT_PREDICTED ? true : false;
     }
 
-    //todo: make async task with this or whatever
     private MovieGroup[] readVideosFromJson() {
         try {
             return deserializeVideosJson(getMoviesJsonFile().toString());
@@ -133,7 +132,6 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
 
     @Override
     public void killRealm() {
-        //todo: what if screen rotates? presenter is injected as singleton, how realm will be recreated on screen recreation?
         realm.close();
     }
 }
