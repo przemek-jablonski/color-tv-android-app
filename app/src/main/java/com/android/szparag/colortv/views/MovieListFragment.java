@@ -39,7 +39,7 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
     MovieListBasePresenter presenter;
 
     @BindView(R.id.recycler_movie_list)
-    ParallaxRecyclerView recyclerMovieList;
+    RecyclerView recyclerMovieList;
 
 
     private MovieAdapter adapter;

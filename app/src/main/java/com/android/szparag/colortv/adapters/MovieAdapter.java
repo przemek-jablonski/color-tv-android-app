@@ -49,14 +49,11 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         ((MovieViewHolder) holder).textTitle.setText(item.getTitle());
         ((MovieViewHolder) holder).textDescription.setText(item.getDescription());
         ((MovieViewHolder) holder).textDuration.setText(Integer.toString(item.getDurationInMinutes())+"m");
-        ((MovieViewHolder) holder).textButton.setText("klikaj tutej se");
 
         Picasso
-                .with(((MovieViewHolder) holder).getBackgroundImage().getContext())
+                .with(((MovieViewHolder) holder).imageMovie.getContext())
                 .load(item.getThumbnailUrl())
-                .into(((MovieViewHolder) holder).getBackgroundImage());
-
-        ((MovieViewHolder) holder).getBackgroundImage().reuse();
+                .into(((MovieViewHolder) holder).imageMovie);
     }
 
     @Override
@@ -64,9 +61,9 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         return super.getItemCount();
     }
 
-    public class MovieViewHolder extends ParallaxViewHolder {
+    public class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        ParallaxImageView imageMovie;
+        ImageView imageMovie;
 
         TextView    textDuration;
         TextView    textRating;
@@ -81,7 +78,7 @@ public class MovieAdapter extends BaseAdapter<Movie> {
             super(itemView);
 
             //todo: use butterknife here
-            imageMovie = ((ParallaxImageView) itemView.findViewById(R.id.recycler_item_movie_image));
+            imageMovie = ((ImageView) itemView.findViewById(R.id.recycler_item_movie_image));
 
             textDuration = (TextView) itemView.findViewById(R.id.recycler_item_movie_duration);
             textRating = (TextView) itemView.findViewById(R.id.recycler_item_movie_rating);
@@ -92,7 +89,7 @@ public class MovieAdapter extends BaseAdapter<Movie> {
 
             textButton = (Button) itemView.findViewById(R.id.recycler_item_movie_button);
 
-            //fixme:java.lang.NullPointerException: Attempt to invoke virtual method 'void com.yayandroid.parallaxrecyclerview.ParallaxImageView.setListener(com.yayandroid.parallaxrecyclerview.ParallaxImageView$ParallaxImageListener)' on a null object reference
+
             if (recyclerOnPosClickListener != null) {
                 textButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -102,11 +99,6 @@ public class MovieAdapter extends BaseAdapter<Movie> {
                 });
             }
 
-        }
-
-        @Override
-        public int getParallaxImageId() {
-            return R.id.recycler_item_movie_image;
         }
 
     }

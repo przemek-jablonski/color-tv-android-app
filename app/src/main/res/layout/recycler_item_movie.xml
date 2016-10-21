@@ -12,13 +12,12 @@
     android:layout_marginRight="@dimen/activity_horizontal_margin_half">
 
     <!-- movie thumbnail part -->
-    <com.yayandroid.parallaxrecyclerview.ParallaxImageView
+    <ImageView
         android:id="@+id/recycler_item_movie_image"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="175dp"
         android:background="@color/colortv_primary_orange_lighter"
-        app:center_crop="false"
-        android:adjustViewBounds="false" />
+        android:scaleType="centerCrop" />
 
 
     <!-- movie information part -->
@@ -42,7 +41,6 @@
                 android:id="@+id/recycler_item_movie_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="adada"
                 android:layout_marginRight="@dimen/activity_horizontal_bigger"
                 android:layout_gravity="center_vertical" />
 
@@ -55,7 +53,6 @@
 
             <TextView
                 android:id="@+id/recycler_item_movie_rating"
-                android:text="aadasda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -70,7 +67,6 @@
 
             <TextView
                 android:id="@+id/recycler_item_movie_views"
-                android:text="adaddwadasda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical" />
@@ -80,7 +76,6 @@
         <!-- title and description -->
         <TextView
             android:id="@+id/recycler_item_movie_title"
-            android:text="Title tutej dlugi abdabdasbdbasdbadag a  gag asg a"
             android:textStyle="bold"
             android:textColor="@color/colortv_black"
             android:layout_width="match_parent"
@@ -92,7 +87,6 @@
 
         <TextView
             android:id="@+id/recycler_item_movie_description"
-            android:text="Title tutej dlugi abdabdasbdbasdbadag a  gag asg a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -105,8 +99,9 @@
         android:id="@+id/recycler_item_movie_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/button_watch_movie"
         android:background="@color/colortv_primary_orange_lighter"
-        android:minHeight="30dp"
+        android:minHeight="35dp"
         android:layout_margin="@dimen/activity_horizontal_margin_half" />
 
 </LinearLayout>

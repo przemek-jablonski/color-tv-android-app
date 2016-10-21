@@ -47,7 +47,7 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
         long videosCount = realm.where(Movie.class).count();
 
         //todo: always will be videosCount == 8 (eg. every time updating realm), fix it
-        if (videosCount != 9) {
+        if (videosCount != 8) {
             Log.e("TROL", "videos count different than 9 (is " + videosCount + ")");
             realm.executeTransaction(new Realm.Transaction() {
                 @Override

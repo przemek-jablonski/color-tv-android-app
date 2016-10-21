@@ -11,7 +11,7 @@
     tools:context="com.android.szparag.colortv.views.MovieListFragment"
     android:orientation="vertical">
 
-    <com.yayandroid.parallaxrecyclerview.ParallaxRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_movie_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
