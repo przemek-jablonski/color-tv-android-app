@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 import static com.android.szparag.colortv.utils.Constants.MOVIE_GROUP_INDEX_1;
 import static com.android.szparag.colortv.utils.Constants.MOVIE_GROUP_INDEX_2;
@@ -65,6 +66,8 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
         onClickButtonDataset(MOVIE_GROUP_INDEX_3);
     }
 
+    private Unbinder viewUnbinder;
+
 
     //android lifecycle callbacks:
     @Override
@@ -77,7 +80,7 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Utils.getDagger(this).inject(this);
-        ButterKnife.bind(this, getView());
+        viewUnbinder = ButterKnife.bind(this, getView());
         presenter.setView(this);
         hideMovieTextView();
     }
@@ -96,6 +99,11 @@ public class ThreeButtonsFragment extends Fragment implements ThreeButtonsBaseVi
         hideMovieTextView();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        viewUnbinder.unbind();
+    }
 
     //base view methods implementations:
     @Override

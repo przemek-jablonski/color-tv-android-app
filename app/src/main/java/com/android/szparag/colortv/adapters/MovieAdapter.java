@@ -14,6 +14,9 @@ import com.android.szparag.colortv.R;
 import com.android.szparag.colortv.backend.models.Movie;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 /**
  * Created by ciemek on 20/10/2016.
@@ -40,53 +43,39 @@ public class MovieAdapter extends BaseAdapter<Movie> {
         );
     }
 
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Movie item = items.get(position);
-
-        ((MovieViewHolder) holder).textRating.setText(Float.toString(item.getRating()));
-        ((MovieViewHolder) holder).textViews.setText(item.getViewsCount());
-        ((MovieViewHolder) holder).textTitle.setText(item.getTitle());
-        ((MovieViewHolder) holder).textDescription.setText(item.getDescription());
-        ((MovieViewHolder) holder).textDuration.setText(Integer.toString(item.getDurationInMinutes())+"m");
-        ((MovieViewHolder) holder).textDuration.setText(Integer.toString(item.getDurationInMinutes())+"m");
-        Picasso.with(((MovieViewHolder) holder).imageMovie.getContext())
-                .load(item.getThumbnailUrl())
-                .into(((MovieViewHolder) holder).imageMovie);
+        onBindMovieViewHolder(((MovieViewHolder) holder), position);
     }
 
-    @Override
-    public int getItemCount() {
-        return super.getItemCount();
+    private void onBindMovieViewHolder(MovieViewHolder holder, int position) {
+        Movie item = items.get(position);
+
+        holder.textRating.setText(Float.toString(item.getRating()));
+        holder.textViews.setText(item.getViewsCount());
+        holder.textTitle.setText(item.getTitle());
+        holder.textDescription.setText(item.getDescription());
+        holder.textDuration.setText(Integer.toString(item.getDurationInMinutes())+"m");
+        holder.textDuration.setText(Integer.toString(item.getDurationInMinutes())+"m");
+        Picasso.with(holder.imageMovie.getContext())
+                .load(item.getThumbnailUrl())
+                .into(holder.imageMovie);
     }
 
 
     public class MovieViewHolder extends ViewHolder {
 
-        ImageView imageMovie;
-        TextView    textDuration;
-        TextView    textRating;
-        TextView    textViews;
-        TextView    textTitle;
-        TextView    textDescription;
-        Button      textButton;
+        @BindView(R.id.recycler_item_movie_button)      Button      textButton;
+        @BindView(R.id.recycler_item_movie_image)       ImageView   imageMovie;
+        @BindView(R.id.recycler_item_movie_duration)    TextView    textDuration;
+        @BindView(R.id.recycler_item_movie_rating)      TextView    textRating;
+        @BindView(R.id.recycler_item_movie_views)       TextView    textViews;
+        @BindView(R.id.recycler_item_movie_title)       TextView    textTitle;
+        @BindView(R.id.recycler_item_movie_description) TextView    textDescription;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
-
-            //todo: use butterknife here
-            imageMovie = ((ImageView) itemView.findViewById(R.id.recycler_item_movie_image));
-
-            textDuration = (TextView) itemView.findViewById(R.id.recycler_item_movie_duration);
-            textRating = (TextView) itemView.findViewById(R.id.recycler_item_movie_rating);
-            textViews = (TextView) itemView.findViewById(R.id.recycler_item_movie_views);
-
-            textTitle = (TextView) itemView.findViewById(R.id.recycler_item_movie_title);
-            textDescription = (TextView) itemView.findViewById(R.id.recycler_item_movie_description);
-
-            textButton = (Button) itemView.findViewById(R.id.recycler_item_movie_button);
-
+            ButterKnife.bind(this, itemView);
 
             if (recyclerOnPosClickListener != null) {
                 textButton.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +86,6 @@ public class MovieAdapter extends BaseAdapter<Movie> {
                 });
             }
         }
-
     }
+
 }

@@ -26,6 +26,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static com.android.szparag.colortv.utils.Constants.MOVIE_ID_RESPONSE_OK;
 import static com.android.szparag.colortv.utils.Constants.MOVIE_LIST_INTENT_EXTRA_KEY;
@@ -42,13 +43,13 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
     RecyclerView recyclerMovieList;
 
     private MovieAdapter adapter;
+    private Unbinder viewUnbinder;
 
 
     //static builder (for parameters):
     public static MovieListFragment newInstance(int movieGroupId) {
         MovieListFragment fragment = new MovieListFragment();
         Bundle fragmentBundle = new Bundle();
-        int m = movieGroupId;
         fragmentBundle.putInt(MOVIE_LIST_INTENT_EXTRA_KEY, movieGroupId);
         fragment.setArguments(fragmentBundle);
         return fragment;
@@ -65,9 +66,15 @@ public class MovieListFragment extends Fragment implements MovieListBaseView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Utils.getDagger(this).inject(this);
-        ButterKnife.bind(this, getView());
+        viewUnbinder = ButterKnife.bind(this, getView());
         presenter.setView(this);
         presenter.populateViewWithMovies(getMovieGroupIndex()); //todo: wrap it in async task or whatever
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        viewUnbinder.unbind();
     }
 
     //base view methods implementation:

@@ -36,6 +36,7 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
     @Inject
     Gson gson;
 
+    //todo: animations? + fixme
     @Inject
     Realm realm;
 
@@ -48,8 +49,9 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
 
         Utils.getDagger(view.getAndroidView()).inject(this);
 
+        //get data from file to db in multithreaded fashion:
         if (realm.where(Movie.class).count() != JSON_MOVIES_COUNT_PREDICTED) {
-            realm.executeTransaction(new Realm.Transaction() {
+            realm.executeTransactionAsync(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     purgeRealm();
@@ -66,8 +68,8 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
 
     @Override
     public boolean purgeRealm() {
-        return (realm.where(Movie.class).findAll().deleteAllFromRealm()
-                && realm.where(RealmMovieGroup.class).findAll().deleteAllFromRealm()) ? true : false;
+        return realm.where(Movie.class).findAll().deleteAllFromRealm()
+                && realm.where(RealmMovieGroup.class).findAll().deleteAllFromRealm() ? true : false;
     }
 
     @Override
@@ -82,8 +84,8 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
             }
         }
 
-        return (realm.where(Movie.class).count() == JSON_MOVIES_COUNT_PREDICTED
-                && realm.where(RealmMovieGroup.class).count() == JSON_MOVIES_GROUP_COUNT_PREDICTED) ? true : false;
+        return realm.where(Movie.class).count() == JSON_MOVIES_COUNT_PREDICTED
+                && realm.where(RealmMovieGroup.class).count() == JSON_MOVIES_GROUP_COUNT_PREDICTED ? true : false;
     }
 
     //todo: make async task with this or whatever
@@ -96,7 +98,20 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
         return null;
     }
 
+    //deserializing json file (which came as a String)
+    private MovieGroup[] deserializeVideosJson(String fullJsonString) {
 
+        String[] separatedMovieGroupsJsonString = fullJsonString.split("[\\r\\n]+");
+        MovieGroup[] movies = new MovieGroup[separatedMovieGroupsJsonString.length];
+
+        for (int i = 0; i < separatedMovieGroupsJsonString.length; ++i) {
+            movies[i] = gson.fromJson(separatedMovieGroupsJsonString[i], MovieGroup.class);
+        }
+
+        return movies;
+    }
+
+    //reading json file
     private Writer getMoviesJsonFile() throws IOException {
         InputStream inputStream = view.getRawResource(R.raw.data);
 
@@ -113,19 +128,6 @@ public class ThreeButtonsPresenter implements ThreeButtonsBasePresenter<ThreeBut
         }
 
         return writer;
-    }
-
-
-    private MovieGroup[] deserializeVideosJson(String fullJsonString) {
-
-        String[] separatedMovieGroupsJsonString = fullJsonString.split("[\\r\\n]+");
-        MovieGroup[] movies = new MovieGroup[separatedMovieGroupsJsonString.length];
-
-        for (int i = 0; i < separatedMovieGroupsJsonString.length; ++i) {
-            movies[i] = gson.fromJson(separatedMovieGroupsJsonString[i], MovieGroup.class);
-        }
-
-        return movies;
     }
 
 
